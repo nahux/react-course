@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -61,8 +62,20 @@ class App extends Component {
 	//Render view
 	render() {
 
-		let persons = null;
+		const buttonStyle = {
+			backgroundColor: 'green',
+			color: 'white',
+			font: 'inheit',
+			border: '1px solid white',
+			padding: '8px',
+			cursor: 'pointer',
+			':hover': {
+				backgroundColor: '#00BE00'
+			}
+		}
 
+		//Persons setter if show person is clicked
+		let persons = null;
 		if (this.state.showPersons) {
 			persons = (
 				<div>
@@ -78,15 +91,36 @@ class App extends Component {
 					})}
 				</div>
 			);
+
+			buttonStyle.backgroundColor = 'white';
+			buttonStyle[':hover'] = {backgroundColor: '#EDE4E4'};
+			buttonStyle.color = 'black';
+			buttonStyle.border = '1px solid lightgrey';
+		}
+
+		//Css classes for p depending of the amount of persons
+		let pClasses = [];
+		if(this.state.persons.length > 1){
+			pClasses.push('green');
+		}
+		if(this.state.persons.length <= 1){
+			pClasses.push('red');
 		}
 
 		return (
-			<div className="App">
-				<h1>Hello world</h1>
-				<button onClick={this.togglePersonsHandler}> Show Persons </button>
-				{persons}
-			</div>
+			<StyleRoot>
+				<div className="App">
+					<h1>Hello world</h1>
+					<button 
+						onClick={this.togglePersonsHandler}
+						style={buttonStyle}> 
+						Show Persons 
+					</button>
+					<p className={pClasses.join(' ')}>Amount of persons: {this.state.persons.length}</p>
+					{persons}
+				</div>
+			</StyleRoot>
 		);
 	}
 }
-export default App;
+export default Radium(App);
