@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+//Import classes is made possible by css modules, if I want to use the class .red I'd put "className={classes.red}"
+//That generates an unique class name with a hash by the module to be rendered in the html/css
+import classes from './App.css'; 
+
 import Person from './Person/Person';
 
 class App extends Component {
@@ -60,18 +63,11 @@ class App extends Component {
 
 	//Render view
 	render() {
-
-		const buttonStyle = {
-			backgroundColor: 'green',
-			color: 'white',
-			font: 'inheit',
-			border: '1px solid white',
-			padding: '8px',
-			cursor: 'pointer'
-		}
-
+		//Class of button red/green
+		let btnClass = '';
 		//Persons setter if show person is clicked
 		let persons = null;
+
 		if (this.state.showPersons) {
 			persons = (
 				<div>
@@ -88,26 +84,22 @@ class App extends Component {
 				</div>
 			);
 
-			buttonStyle.backgroundColor = 'white';
-			buttonStyle.color = 'black';
-			buttonStyle.border = '1px solid lightgrey';
+			btnClass = classes.red;
 		}
 
 		//Css classes for p depending of the amount of persons
 		let pClasses = [];
 		if(this.state.persons.length > 1){
-			pClasses.push('green');
+			pClasses.push( classes.green );
 		}
 		if(this.state.persons.length <= 1){
-			pClasses.push('red');
+			pClasses.push( classes.red );
 		}
 
 		return (
-			<div className="App">
+			<div className={classes.App}>
 				<h1>Hello world</h1>
-				<button 
-					onClick={this.togglePersonsHandler}
-					style={buttonStyle}> 
+				<button onClick={this.togglePersonsHandler} className={btnClass}>
 					Show Persons 
 				</button>
 				<p className={pClasses.join(' ')}>Amount of persons: {this.state.persons.length}</p>

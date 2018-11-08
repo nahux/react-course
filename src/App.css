@@ -11,3 +11,23 @@
 	color: #059105;
 	font-weight: bold;
 }
+
+.App button {
+	border: 1px solid #B9B9FF;
+	padding: 16px;
+	color: white;
+	background-color: #218868;
+	font: inherit;
+}
+
+.App button:hover {
+	background-color: #35DDA9;
+}
+
+.App button.red {
+	background-color: #FF1E1E;
+}
+
+.App button.red:hover {
+	background-color: #FF6060;
+}
