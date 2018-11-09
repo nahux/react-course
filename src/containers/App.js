@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 //That generates an unique class name with a hash by the module to be rendered in the html/css
 import classes from './App.css'; 
 
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
 	state = {
@@ -63,46 +65,29 @@ class App extends Component {
 
 	//Render view
 	render() {
-		//Class of button red/green
-		let btnClass = '';
+		
 		//Persons setter if show person is clicked
 		let persons = null;
 
 		if (this.state.showPersons) {
 			persons = (
 				<div>
-					{this.state.persons.map( (person,index) => {
-						return(
-							<Person 
-								name={person.name} 
-								age={person.age}
-								click={this.deletePersonHandler.bind(this,index)}
-								key={person.id}
-								changed={(event) => this.nameChangedHandler(event,person.id)}
-							/>);
-					})}
+					<Persons 
+						persons = {this.state.persons}
+						clicked = {this.deletePersonHandler}
+						changed = {this.nameChangedHandler}
+					/>
 				</div>
 			);
-
-			btnClass = classes.red;
-		}
-
-		//Css classes for p depending of the amount of persons
-		let pClasses = [];
-		if(this.state.persons.length > 1){
-			pClasses.push( classes.green );
-		}
-		if(this.state.persons.length <= 1){
-			pClasses.push( classes.red );
 		}
 
 		return (
 			<div className={classes.App}>
-				<h1>Hello world</h1>
-				<button onClick={this.togglePersonsHandler} className={btnClass}>
-					Show Persons 
-				</button>
-				<p className={pClasses.join(' ')}>Amount of persons: {this.state.persons.length}</p>
+				<Cockpit
+					clicked = {this.togglePersonsHandler}
+					pLength = {this.state.persons.length}
+					showPersons = {this.state.showPersons}
+				/>
 				{persons}
 			</div>
 		);
