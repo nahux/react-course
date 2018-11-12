@@ -21,6 +21,24 @@ export class Persons extends Component {
 		console.log('[Persons.js] at didMount');
 	}
 
+	////Update Lifecycle methods\\\\
+	componentWillReceiveProps(nextProps){
+		console.log('[UPDATE Persons.js] at WillReceiveProps',nextProps );
+	}
+
+	shouldComponentUpdate(nextProps, nextState){
+		console.log('[UPDATE Persons.js] at shouldComponentUpdate',nextProps,nextState);
+		return nextProps.persons !== this.props.persons;
+	}
+
+	componentWillUpdate(nextProps, nextState){
+		console.log('[UPDATE Persons.js] at WillUpdate',nextProps, nextState );
+	}
+
+	componentDidUpdate(){
+		console.log('[UPDATE Persons.js] at DidUpdate' );
+	}
+
 	render() {
 		console.log('[Persons.js] inside render');
 
