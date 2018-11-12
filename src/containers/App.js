@@ -8,6 +8,21 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
+
+	////Lifecycle methods\\\\
+	constructor(props) {
+		super(props);
+		console.log('[App.js] at constructor', props);
+	}
+
+	componentWillMount(){
+		console.log('[App.js] at willMount');
+	}
+
+	componentDidMount(){
+		console.log('[App.js] at didMount');
+	}
+
 	state = {
 		persons: [
 			{ id: 'a', name:"Nahuel", age:23 },
@@ -65,7 +80,7 @@ class App extends Component {
 
 	//Render view
 	render() {
-		
+		console.log('[App.js] inside render');
 		//Persons setter if show person is clicked
 		let persons = null;
 
