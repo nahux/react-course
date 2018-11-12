@@ -20,7 +20,7 @@ const cockpit = (props) => {
 
 	return (
 		<div className={classes.Cockpit}>
-			<h1>Hello world</h1>
+			<h1>{props.appTitle}</h1>
 			<button onClick={props.clicked} className={btnClass}>
 				Show Persons 
 			</button>
