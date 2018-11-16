@@ -29,7 +29,8 @@ class App extends Component {
 			{ id: 'b', name:"Vettel", age:31 },
 			{ id: 'c', name:"Kimi", age:39 }
 		],
-		showPersons: false
+		showPersons: false,
+		clickedCount: 0
 	}
 
 	//Change First Person name and completes the other two.
@@ -65,8 +66,12 @@ class App extends Component {
 	//Show or Hide Persons
 	togglePersonsHandler = (event) => {
 		const doesShow = this.state.showPersons;
-		this.setState({
-			showPersons: !doesShow
+		//I use the setState arrow function cause using this.state doesn't imply that the actual state value is right
+		this.setState( (prevState,props) => {
+			return {
+				showPersons: !doesShow,
+				clickedCount: prevState.clickedCount+1
+			}
 		});
 	}
 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+//PropTypes to validaate props
+import PropTypes from 'prop-types';
 import classes from './Person.css';
 
 
@@ -30,5 +32,13 @@ export class Person extends Component {
 		);
 	}
 }
+
+Person.propTypes = {
+	name: PropTypes.string,
+	age: PropTypes.number,
+	changed:  PropTypes.func,
+	click: PropTypes.func
+}
+
 
 export default Person;
