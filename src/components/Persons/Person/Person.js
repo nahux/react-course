@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classes from './Person.css';
 
+//AuthContext for authentication
+import { AuthContext } from '../../../containers/App';
 
 export class Person extends Component {
 	
@@ -18,6 +20,9 @@ export class Person extends Component {
 
 	componentDidMount(){
 		console.log('[Person.js] at didMount');
+		if(this.props.name === 'Vettel'){
+			this.inputPerson.focus();
+		}
 	}
 
 	render() {
@@ -25,8 +30,15 @@ export class Person extends Component {
 
 		return (
 			<div className={classes.Person}>
+				<AuthContext.Consumer>
+					{auth => auth ? <p>Authenticated</p> : null}
+				</AuthContext.Consumer>
 				<p>I'm {this.props.name} and I'm {this.props.age} years old. {this.props.children}</p>
-				<input type="text" onChange={this.props.changed} value={this.props.name} />
+				<input 
+					ref = {(inp) => this.inputPerson = inp}
+					type="text" 
+					onChange={this.props.changed} 
+					value={this.props.name} />
 				<button onClick={this.props.click}>Delete</button>
 			</div>
 		);

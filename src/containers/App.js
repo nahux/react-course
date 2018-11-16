@@ -7,6 +7,8 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
+export const AuthContext = React.createContext(false);
+
 class App extends Component {
 
 	////Lifecycle methods\\\\
@@ -30,7 +32,8 @@ class App extends Component {
 			{ id: 'c', name:"Kimi", age:39 }
 		],
 		showPersons: false,
-		clickedCount: 0
+		clickedCount: 0,
+		authenticated: false
 	}
 
 	//Change First Person name and completes the other two.
@@ -83,6 +86,11 @@ class App extends Component {
 		this.setState({persons : persons});
 	}
 
+	//login
+	loginHandler = () => {
+		this.setState({authenticated: true});
+	}
+
 	//Render view
 	render() {
 		console.log('[App.js] inside render');
@@ -105,11 +113,14 @@ class App extends Component {
 			<div className={classes.App}>
 				<Cockpit
 					appTitle = {this.props.title}
+					login = {this.loginHandler}
 					clicked = {this.togglePersonsHandler}
 					pLength = {this.state.persons.length}
 					showPersons = {this.state.showPersons}
 				/>
-				{persons}
+				<AuthContext.Provider value={this.state.authenticated}>
+					{persons}
+				</AuthContext.Provider>
 			</div>
 		);
 	}
